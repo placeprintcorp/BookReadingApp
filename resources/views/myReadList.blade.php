@@ -7,16 +7,21 @@
         <v-server-table
             class="table default-table table--groups"
             ref="userBooksListing"
-            url="/user/my-read-list-data"
+            url="{{config('app.url')}}/user/my-read-list-data"
             :columns="columns"
             :options="options"
             @filter="filtered"
         >
-        
-        <div slot="actions" slot-scope="props" class="table--apiKeys__actions-links">
+        <div slot="book_img_url" slot-scope="props" class="table--books__book_image-links">
+            <img :src="props.row.book_img_url" alt="" width="60" height="60" style="
+            margin-left: 25px;
+        ">
+        </div>
+
+        <div slot="actions" slot-scope="props" class="table--books__actions-links">
 
             <a
-                :href="'/user/view-book/'+props.row.book_id"
+                :href="'{{config('app.url')}}/user/view-book/'+props.row.book_id"
                 class="btn-link actions__link d-inline-block">
                 
                 <i class="fa fa-search actions__icon"></i>View
@@ -39,5 +44,5 @@
 
 @endsection
 @section('footer_scripts')
-<script src="{{ mix('js/myReadList.js') }}"></script>
+<script src="{{ url('js/myReadList.js') }}"></script>
 @endsection

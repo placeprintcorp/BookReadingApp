@@ -17,11 +17,12 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    <link href="{{ url('css/app.css') }}" rel="stylesheet">
 
     @yield('header_styles')
 </head>
 <body>
+    <input type="hidden" name="baseUrl" id="baseUrl" value="{{ config('app.url') }}">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
@@ -88,7 +89,7 @@
         </main>
     </div>
     
-    <script src="{{ mix('/js/vendor.js') }}"></script>
+    <script src="{{ url('/js/vendor.js') }}"></script>
    
     @yield('footer_scripts')
     

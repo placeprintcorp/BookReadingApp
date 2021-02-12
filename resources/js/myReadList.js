@@ -19,6 +19,7 @@ var MyListScreen = new Vue({
     data(){
         return {
             columns: [
+                'book_img_url',
                 'book_title',
                 'authors',
                 'actions',
@@ -38,9 +39,10 @@ var MyListScreen = new Vue({
                     'book_title',
                 ],
                 columnsClasses: {
-                    book_title: 'table--apiKeys__book_title',
-                    authors: 'table--apiKeys__authors',
-                    actions: 'table--apiKeys__actions',
+                    book_img_url: 'table--books__book_image',
+                    book_title: 'table--books__book_title',
+                    authors: 'table--books__authors',
+                    actions: 'table--books__actions',
                 },
             },
 
@@ -52,6 +54,9 @@ var MyListScreen = new Vue({
        
     },
     methods : {
+        onPaginationData (paginationData) {
+            this.$refs.pagination.setPaginationData(paginationData)
+        },
         filtered(value) {
             this.filterValue = value;
         },
@@ -60,9 +65,10 @@ var MyListScreen = new Vue({
         },
         
         removeFromReadList(bookeId) {
+            var baseUrl = $('#baseUrl').val();
             this.$dialog.confirm('Are you sure you want to remove book from read list?')
                 .then(() => {
-                    axios.delete(`/user/remove-book/${bookeId}`)
+                    axios.delete(baseUrl+`/user/remove-book/${bookeId}`)
                         .then(response => {
                             this.refresh()
                             this.toastedSuccessMessage(response.data.message)

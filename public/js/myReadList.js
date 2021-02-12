@@ -214,7 +214,7 @@ var MyListScreen = new Vue({
   mixins: [_components_mixins_toastedMessages__WEBPACK_IMPORTED_MODULE_0__.toastedMessages],
   data: function data() {
     return {
-      columns: ['book_title', 'authors', 'actions'],
+      columns: ['book_img_url', 'book_title', 'authors', 'actions'],
       options: {
         highlightMatches: true,
         texts: {
@@ -228,9 +228,10 @@ var MyListScreen = new Vue({
         },
         sortable: ['book_title'],
         columnsClasses: {
-          book_title: 'table--apiKeys__book_title',
-          authors: 'table--apiKeys__authors',
-          actions: 'table--apiKeys__actions'
+          book_img_url: 'table--books__book_image',
+          book_title: 'table--books__book_title',
+          authors: 'table--books__authors',
+          actions: 'table--books__actions'
         }
       },
       books: [],
@@ -239,6 +240,9 @@ var MyListScreen = new Vue({
   },
   beforeCreate: function beforeCreate() {},
   methods: {
+    onPaginationData: function onPaginationData(paginationData) {
+      this.$refs.pagination.setPaginationData(paginationData);
+    },
     filtered: function filtered(value) {
       this.filterValue = value;
     },
@@ -248,8 +252,9 @@ var MyListScreen = new Vue({
     removeFromReadList: function removeFromReadList(bookeId) {
       var _this = this;
 
+      var baseUrl = $('#baseUrl').val();
       this.$dialog.confirm('Are you sure you want to remove book from read list?').then(function () {
-        axios["delete"]("/user/remove-book/".concat(bookeId)).then(function (response) {
+        axios["delete"](baseUrl + "/user/remove-book/".concat(bookeId)).then(function (response) {
           _this.refresh();
 
           _this.toastedSuccessMessage(response.data.message);

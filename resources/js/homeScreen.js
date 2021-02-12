@@ -22,8 +22,8 @@ var HomeScreen = new Vue({
     },
     methods : {
         searchBooks(){
-            
-            axios.get('https://www.googleapis.com/books/v1/volumes?q='+this.searchInput)
+            //var key = $('#googleBookKey').val;
+            axios.get('https://www.googleapis.com/books/v1/volumes?q='+this.searchInput+'&key=AIzaSyCVaGoqKkMzMGAvTkWJ00W47GleDzsN3ns')
             .then((response) => 
                     this.books = response.data.items
             )
@@ -32,8 +32,9 @@ var HomeScreen = new Vue({
             });
         },
         addToWishList(book){
-
-            axios.post('/user/book/add-to-my-read-list', {
+            
+            var baseUrl = $('#baseUrl').val();
+            axios.post(baseUrl+'/user/book/add-to-my-read-list', {
                 book : JSON.stringify(book)
               })
             .then((response) => 

@@ -126,7 +126,8 @@ var HomeScreen = new Vue({
     searchBooks: function searchBooks() {
       var _this = this;
 
-      axios.get('https://www.googleapis.com/books/v1/volumes?q=' + this.searchInput).then(function (response) {
+      //var key = $('#googleBookKey').val;
+      axios.get('https://www.googleapis.com/books/v1/volumes?q=' + this.searchInput + '&key=AIzaSyCVaGoqKkMzMGAvTkWJ00W47GleDzsN3ns').then(function (response) {
         return _this.books = response.data.items;
       })["catch"](function (error) {
         _this.toastedErrorMessage(error.response.data.message);
@@ -135,7 +136,8 @@ var HomeScreen = new Vue({
     addToWishList: function addToWishList(book) {
       var _this2 = this;
 
-      axios.post('/user/book/add-to-my-read-list', {
+      var baseUrl = $('#baseUrl').val();
+      axios.post(baseUrl + '/user/book/add-to-my-read-list', {
         book: JSON.stringify(book)
       }).then(function (response) {
         return _this2.toastedSuccessMessage(response.data.message);

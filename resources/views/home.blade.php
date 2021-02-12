@@ -41,8 +41,9 @@
 
         </div>
     </div>   
-   
 </div>
+
+
 
 @endsection
 @section('header_styles')
@@ -59,5 +60,5 @@
 @endsection
 
 @section('footer_scripts')
-<script src="{{ mix('js/homeScreen.js') }}"></script>
+<script src="{{ url('js/homeScreen.js') }}"></script>
 @endsection
