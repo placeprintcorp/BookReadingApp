@@ -19,6 +19,10 @@
                     <p class="card-text">Authors : {{ $book->authors}}</p>
                     <p class="card-text">Category : {{ $book->categories}}</p>
                     <p class="card-text">Average Ratting : {{ $book->average_rating}} </p>
+
+                    <a href="{{ route('book.readList') }}" class="btn btn-primary">Back</a>
+
+
                     <a href="{{ $book->book_info_link }}" target="_blank" class="btn btn-primary">View More</a>
                     
                 </div>
