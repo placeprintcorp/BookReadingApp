@@ -70,7 +70,7 @@ class LoginTest extends TestCase
     public function test_user_can_login_with_correct_credentials()
     {
         $user = User::factory()->create([
-            'password' => Hash::make($password = 'i-love-laravel'),
+            'password' => Hash::make($password = 'ken@18995'),
         ]);
 
         $response = $this->post($this->login_post_route(), [
@@ -86,7 +86,7 @@ class LoginTest extends TestCase
     {
         $user = User::factory()->create([
             'id' => random_int(1, 100),
-            'password' => Hash::make($password = 'i-love-laravel'),
+            'password' => Hash::make($password = 'ken@18995'),
         ]);
 
         $response = $this->post($this->login_post_route(), [
@@ -109,7 +109,7 @@ class LoginTest extends TestCase
     public function test_user_cannot_login_with_incorrect_password()
     {
         $user = User::factory()->create([
-            'password' => Hash::make('i-love-laravel'),
+            'password' => Hash::make('ken@18995'),
         ]);
 
         $response = $this->from($this->login_get_route())->post($this->login_post_route(), [
@@ -127,7 +127,7 @@ class LoginTest extends TestCase
     public function test_user_cannot_login_with_email_that_does_not_exist()
     {
         $response = $this->from($this->login_get_route())->post($this->login_post_route(), [
-            'email' => 'nobody@example.com',
+            'email' => 'nobody@mailinator.com',
             'password' => 'invalid-password',
         ]);
 
@@ -159,7 +159,7 @@ class LoginTest extends TestCase
     public function test_user_cannot_make_more_than_five_attempts_in_one_minute()
     {
         $user = User::factory()->create([
-            'password' => Hash::make($password = 'i-love-laravel'),
+            'password' => Hash::make($password = 'ken@18995'),
         ]);
 
         foreach (range(0, 5) as $_) {
