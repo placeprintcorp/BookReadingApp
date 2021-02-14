@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     
@@ -18,8 +18,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/user/view-book/{bookToRead}', [App\Http\Controllers\BookToReadController::class, 'show'])->name('book.show');
     
     Route::delete('/user/remove-book/{bookToRead}', [App\Http\Controllers\BookToReadController::class, 'destroy'])->name('book.destroy');
-
-
+    
 });
 
 
