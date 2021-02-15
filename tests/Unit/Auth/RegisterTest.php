@@ -44,7 +44,7 @@ class RegisterTest extends TestCase
 
     public function testUserCannotViewARegistrationFormWhenAuthenticated()
     {
-        $user = factory(\App\User::class)->make();
+        $user = User::factory()->make();
 
         $response = $this->actingAs($user)->get($this->register_get_route());
 
